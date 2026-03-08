@@ -1,0 +1,219 @@
+
+/* --- Golden Return Link --- */
+.back-link {
+    position: fixed;
+    top: 40px;
+    right: 5%;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    z-index: 100;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    transition: all 0.4s ease;
+}
+
+.back-link:hover {
+    letter-spacing: 5px;
+    border-bottom-color: var(--gold);
+    opacity: 1;
+}
+
+/* Mobile tweak for the return link */
+@media (max-width: 600px) {
+    .back-link {
+        top: 20px;
+        font-size: 0.55rem;
+    }
+}
+
+:root {
+    --bg-gradient: radial-gradient(circle at top, #2c3e50 0%, #1a1c22 100%);
+    --text-main: #ffffff;
+    --text-sub: #a1a1aa;
+    --card-bg: rgba(255, 255, 255, 0.03); 
+    --gold: #d4af37; 
+    --card-border: rgba(212, 175, 55, 0.2);
+}
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    /* Allows the absolute designs to reference the full page height */
+    position: relative; 
+}
+
+/* Golden Grass Designs - Now scrolling with the page */
+body::before,
+body::after {
+    content: "";
+    position: absolute; /* Changed from fixed to absolute to move with scroll */
+    top: 0;
+    width: 350px; 
+    height: 100%; /* Spans the entire length of your scrollable content */
+    z-index: -1;
+    opacity: 0.18; 
+    pointer-events: none;
+}
+
+/* Scrolling Left Design */
+body::before {
+    left: 0;
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0 100 Q 20 50 0 0 M10 100 Q 30 40 10 10 M25 100 Q 45 60 25 20 M40 100 Q 55 75 45 40' stroke='%23d4af37' fill='none' stroke-width='0.2'/%3E%3C/svg%3E");
+    background-repeat: repeat-y;
+    background-size: 100% 800px; /* Each pattern tile is 800px tall */
+}
+
+/* Scrolling Right Design */
+body::after {
+    right: 0;
+    background-image: 
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M100 100 Q 80 50 100 0 M90 100 Q 70 40 90 10 M75 100 Q 55 60 75 20 M60 100 Q 45 75 55 40' stroke='%23d4af37' fill='none' stroke-width='0.2'/%3E%3C/svg%3E");
+    background-repeat: repeat-y;
+    background-size: 100% 800px;
+}
+
+header {
+    text-align: center;
+    margin-top: 60x;
+    margin-bottom: 45px;
+    z-index: 1;
+}
+
+header h1 {
+    font-weight: 200;
+    letter-spacing: 10px; /* Wider spacing for an "archival" feel */
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 5px;
+    margin-top: 45px;
+    opacity: 0.9;
+}
+
+header p {
+    color: var(--text-sub);
+    font-size: 0.75rem; /* Smaller and cleaner */
+    letter-spacing: 2px;
+    text-transform: lowercase; /* Minimalist style */
+    opacity: 0.7;
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 35px;
+    width: 90%;
+    max-width: 520px;    
+    padding-bottom: 100px; /* Extra padding so you can see the scroll effect */
+    z-index: 1;
+}
+
+.book-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    opacity: 0; 
+}
+
+.book-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.book-image {
+    width: 100%;
+    aspect-ratio: 2/3;
+    background-color: #1a1c22;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.book-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book-info {
+    margin-top: 18px;
+    text-align: center;
+}
+
+.book-info h3 {
+    font-size: 0.95rem;
+    margin: 0;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.book-info p {
+    font-size: 0.75rem;
+    color: var(--gold);
+    margin: 6px 0 0 0;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* Styling for the hidden detail text */
+.book-description {
+    font-size: 0.8rem;
+    color: var(--text-sub);
+    font-style: italic;
+    margin-top: 12px;
+    
+    /* Hide by default */
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    
+    /* Smooth transition for the "live" feel */
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    line-height: 1.5;
+}
+
+/* Reveal logic when the card is hovered */
+.book-card:hover .book-description {
+    opacity: 1;
+    max-height: 100px; /* Adjust if your text is longer */
+    margin-bottom: 5px;
+}
+
+
+
+/* Mobile Tweaks */
+@media (max-width: 800px) {
+    body::before, body::after {
+        width: 180px;
+    }
+}
+
+@media (max-width: 550px) {
+    .book-grid {
+        grid-template-columns: 1fr;
+        max-width: 280px;
+    }
+    body::before, body::after {
+        width: 120px;
+        opacity: 0.1;
+    }
+}
